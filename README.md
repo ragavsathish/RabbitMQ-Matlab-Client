@@ -18,6 +18,9 @@ This is an example implementation of [java to matlab callback ](http://undocumen
 Subscribe message 
 
 1. Define a Matlab call back function 
+2. Instantiate MessagingEvent object and assosciate a calback properties for the event.
+3. Create a thread to subscribe for message
+
 
 ```Matlab
 
@@ -26,12 +29,7 @@ function myCallbackFcn(hObject, eventData)
   obj = java.lang.StringBuilder('Receieved Time [').append(str).append(']').append(eventData.message);
   disp(obj.toString);
 end  %myCallbackFcn
-```
 
-2. Instantiate MessagingEvent object and assosciate a calback properties for the event.
-3. Create a thread to subscribe for message
-
-```Matlab
 evt = mqwrapper.MessagingEvent;
 h = handle(evt,'CallbackProperties');
 set(evt,'ListenCallback',@(h,e)myCallbackFcn(h,e));
